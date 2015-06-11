@@ -48,8 +48,8 @@ initGeoPosition :: GeoPositionCallbacks Fay
                 -> Fay ()
 initGeoPosition gpc gpo = do
   getCurrentPosition' gpc's gpc'e gpc'o
-  where getCurrentPosition' :: GeoPositionCallback Fay
-                            -> Nullable (GeoPositionErrorCallback Fay)
+  where getCurrentPosition' :: (GeoPosition -> Fay ())
+                            -> Nullable (GeoPositionError -> Fay ())
                             -> Nullable GeoPositionOptions
                             -> Fay ()
         getCurrentPosition' = ffi "navigator.geolocation.getCurrentPosition(%1,%2,%3)"
@@ -62,12 +62,9 @@ initGeoPosition gpc gpo = do
 
 -- | See section [5.1 - W3C Geolocation API]
 -- Requires the monad type that the callbacks have action on
-data GeoPositionCallbacks m = GeoPositionCallbacks { geoPositionCallback      :: GeoPositionCallback m
-                                                   , geoPositionErrorCallback :: Maybe (GeoPositionErrorCallback m)
+data GeoPositionCallbacks m = GeoPositionCallbacks { geoPositionCallback      :: GeoPosition -> m ()
+                                                   , geoPositionErrorCallback :: Maybe (GeoPositionError -> m ())
                                                    }
-
-type GeoPositionCallback      m = GeoPosition      -> m ()
-type GeoPositionErrorCallback m = GeoPositionError -> m ()
 
 -- | See section [5.2 - W3C Geolocation API]
 data GeoPositionOptions =
