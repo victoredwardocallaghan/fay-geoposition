@@ -16,7 +16,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Edward O'Callaghan
 maintainer:          eocallaghan@alterapraxis.com
--- copyright:           
+copyright:           (c) 2015 Altera Praxis Pty Ltd
 category:            Web
 build-type:          Simple
 data-files:          src/Fay/GeoPosition.hs
