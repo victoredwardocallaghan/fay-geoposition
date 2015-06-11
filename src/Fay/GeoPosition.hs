@@ -17,9 +17,9 @@
 
 module Fay.GeoPosition ( geoPositionErrorMessage
                        , geoPositionErrorCode
-#ifdef FAY
+-- #ifdef FAY
                        , initGeoPosition
-#endif
+-- #endif
                        , GeoPositionCallbacks(..)
                        , GeoPositionOptions(..)
                        , GeoPosition(..)
@@ -31,16 +31,16 @@ module Fay.GeoPosition ( geoPositionErrorMessage
 
 
 import Fay.Text      (Text,unpack)
-#ifdef FAY
+-- #ifdef FAY
 import FFI
 import Data.Nullable (toNullable)
-#endif
+-- #endif
 import Data.Time     (UTCTime)
 import Data.Data
 import Prelude
 
 
-#ifdef FAY
+-- #ifdef FAY
 -- | Call to initialise GeoPosition API with callback
 --   actions to be taken upon success or error.
 initGeoPosition :: GeoPositionCallbacks Fay
@@ -57,7 +57,7 @@ initGeoPosition gpc gpo = do
         gpc'e = toNullable (geoPositionErrorCallback gpc)
         gpc'o = toNullable gpo
 
-#endif
+-- #endif
 
 
 -- | See section [5.1 - W3C Geolocation API]
